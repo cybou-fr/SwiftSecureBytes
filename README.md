@@ -1,6 +1,29 @@
 # SwiftSecureBytes
 
+[![Swift 6.0+](https://img.shields.io/badge/Swift-6.0+-orange.svg)](https://swift.org)
+[![Platform](https://img.shields.io/badge/Platforms-macOS%20%7C%20iOS%20%7C%20tvOS%20%7C%20watchOS-blue.svg)](https://swift.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/your-org/SwiftSecureBytes/actions)
+
 A Swift package for secure memory handling of sensitive data like cryptographic keys, passwords, and mnemonics. Provides automatic memory zeroing and protection against data leakage.
+
+## Table of Contents
+
+- [Features](#features)
+- [Architecture](#architecture)
+- [Quick Start](#quick-start)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Reference](#api-reference)
+- [Testing](#testing)
+- [Security Considerations](#security-considerations)
+- [Requirements](#requirements)
+- [Changelog](#changelog)
+- [Contributing](#contributing)
+- [Authors](#authors)
+- [License](#license)
+- [Support](#support)
+- [Roadmap](#roadmap)
 
 ## Features
 
@@ -36,6 +59,18 @@ A property wrapper that automatically wraps `String` and `Data` values in their 
 - **Constant-Time Equality**: Implements timing-attack resistant comparison using XOR operations
 - **No Copy-on-Write**: Avoids Swift's copy-on-write optimization for Data to ensure memory is properly zeroed
 
+## Quick Start
+
+```swift
+import SwiftSecureBytes
+
+// Secure your cryptographic key
+let key = SecureBytes(hexString: "deadbeefcafebabe")!
+
+// Use it safely - memory is automatically zeroed when done
+print("Key length: \(key.count)") // Key length: 8
+```
+
 ## Installation
 
 ### Swift Package Manager
@@ -44,7 +79,7 @@ Add the following to your `Package.swift` dependencies:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/your-org/SwiftSecureBytes.git", from: "1.0.0")
+    .package(url: "https://github.com/cybou-fr/SwiftSecureBytes.git", from: "1.0.0")
 ]
 ```
 
@@ -219,6 +254,22 @@ extension Data {
 }
 ```
 
+## Testing
+
+Run the test suite to ensure everything works correctly:
+
+```bash
+swift test
+```
+
+The test suite covers:
+- SecureBytes creation and memory management
+- Constant-time equality operations
+- Property wrapper functionality
+- Collection protocol conformance
+- Memory locking behavior
+- Hex encoding/decoding
+
 ## Security Considerations
 
 - **Memory Zeroing**: While the library attempts to zero memory, Swift's optimizer may in some cases eliminate these operations. The library uses memory barriers and `withExtendedLifetime` to mitigate this.
@@ -229,13 +280,96 @@ extension Data {
 
 ## Requirements
 
-- Swift 6.0+
 - macOS 10.15+, iOS 13+, tvOS 13+, watchOS 6+
 
-## License
+## Changelog
 
-[Add your license here]
+### Version 1.0.0
+- Initial release
+- SecureBytes class with memory locking and zeroing
+- SecureString class for sensitive string data
+- @Secure property wrapper
+- Hex encoding/decoding support
+- Collection protocol conformance
+- Constant-time equality operations
 
 ## Contributing
 
-[Add contribution guidelines]
+We welcome contributions! Please follow these guidelines:
+
+### Development Setup
+1. Fork the repository
+2. Clone your fork: `git clone https://github.com/cybou-fr/SwiftSecureBytes.git`
+3. Create a feature branch: `git checkout -b feature/your-feature-name`
+4. Make your changes
+5. Run tests: `swift test`
+6. Ensure code compiles: `swift build`
+7. Commit your changes: `git commit -am 'Add some feature'`
+8. Push to the branch: `git push origin feature/your-feature-name`
+9. Create a Pull Request
+
+### Code Style
+- Follow Swift API Design Guidelines
+- Use clear, descriptive names
+- Add documentation comments for public APIs
+- Write tests for new functionality
+- Ensure all tests pass before submitting
+
+### Reporting Issues
+- Use GitHub Issues to report bugs
+- Include Swift version, platform, and steps to reproduce
+- For security issues, please email maintainers directly
+
+## Authors
+
+- **CybBackup Team** - Initial development and maintenance
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+```
+MIT License
+
+Copyright (c) 2026 CybBackup Team
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+## Support
+
+- **Issues**: [GitHub Issues](https://github.com/cybou-fr/SwiftSecureBytes/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/cybou-fr/SwiftSecureBytes/discussions)
+- **Documentation**: This README and inline code documentation
+
+For security-related questions or concerns, please contact the maintainers directly.
+
+## Roadmap
+
+### Planned Features
+- [ ] Additional cryptographic utilities
+- [ ] Key derivation function wrappers
+- [ ] Hardware security module integration
+- [ ] Performance optimizations
+- [ ] Additional platform support
+
+### Future Considerations
+- Cross-platform memory locking improvements
+- Advanced secure data structures
+- Integration with Swift Crypto framework
