@@ -3,9 +3,11 @@
 [![Swift 6.0+](https://img.shields.io/badge/Swift-6.0+-orange.svg)](https://swift.org)
 [![Platform](https://img.shields.io/badge/Platforms-macOS%20%7C%20iOS%20%7C%20tvOS%20%7C%20watchOS-blue.svg)](https://swift.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/your-org/SwiftSecureBytes/actions)
+<!-- Build status is intentionally not advertised without a real verified CI run. -->
 
-A Swift package for secure memory handling of sensitive data like cryptographic keys, passwords, and mnemonics. Provides automatic memory zeroing and protection against data leakage.
+A Swift package experimenting with memory handling of sensitive data like cryptographic keys, passwords, and mnemonics.
+
+> **Security and maturity notice:** research-oriented code, not independently audited. Swift `String`/`Data` copies, compiler optimizations, operating-system memory management and error paths can defeat best-effort zeroization. The examples do not establish that all sensitive copies are locked or erased. See the code and tests before using this in any security-critical application. Provides automatic memory zeroing and protection against data leakage.
 
 ## Table of Contents
 
